@@ -59,19 +59,28 @@ if __name__ == "__main__":
   parser.set_defaults(loadweights=False)
   args = parser.parse_args()
 
+
   model = get_model()
-  model.fit_generator(
-    gen(20, args.host, port=args.port),
-    samples_per_epoch=10000,
-    nb_epoch=args.epoch,
-    validation_data=gen(20, args.host, port=args.val_port),
-    nb_val_samples=1000
-  )
-  print("Saving model weights and configuration file.")
+  
+  for i in range(0, 2):
+    epoch = str(i + 1)
+    print('epoch {}'.format(epoch))
+    # model.save_weights(args.destfile + '_' + epoch +'.h5', True)
+    # with open(args.destfile + '_' + epoch + '.json', 'w') as outfile: 
+    #   json.dump(model.to_json(), outfile)
+    # print('saved model as', args.destfile + '_' + epoch)
+    model.fit_generator(
+      gen(20, args.host, port=args.port),
+      samples_per_epoch=1000,
+      nb_epoch=1,
+      validation_data=gen(20, args.host, port=args.val_port),
+      nb_val_samples=1000
+    )
+    print("Saving model weights and configuration file.")
 
-  if not os.path.exists("./outputs/steering_model"):
-      os.makedirs("./outputs/steering_model")
+    if not os.path.exists("./outputs/steering_model"):
+        os.makedirs("./outputs/steering_model")
 
-  model.save_weights("./outputs/steering_model/steering_angle.keras", True)
-  with open('./outputs/steering_model/steering_angle.json', 'w') as outfile:
-    json.dump(model.to_json(), outfile)
+    model.save_weights("./outputs/steering_model/steering_angle{}.keras".format(epoch), True)
+    with open('./outputs/steering_model/steering_angle{}.json'.format(epoch), 'w') as outfile:
+      json.dump(model.to_json(), outfile)
