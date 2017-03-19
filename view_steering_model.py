@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
   # default dataset is the validation data on the highway
   dataset = args.dataset
-  skip = 300
+  skip = 594
 
   log = h5py.File("dataset/log/"+dataset+".h5", "r")
   cam = h5py.File("dataset/camera/"+dataset+".h5", "r")
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     speed_ms = log['speed'][i]
 
     draw_path_on(img, speed_ms, -angle_steers/10.0)
-    draw_path_on(img, speed_ms, -predicted_steers/10.0, (0, 255, 0))
+    # draw_path_on(img, speed_ms, -predicted_steers/10.0, (0, 255, 0))
 
     # draw on
     pygame.surfarray.blit_array(camera_surface, img.swapaxes(0,1))
