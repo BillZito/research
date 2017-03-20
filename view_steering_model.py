@@ -88,6 +88,7 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Path viewer')
   parser.add_argument('model', type=str, help='Path to model definition json. Model weights should be on the same path.')
   parser.add_argument('--dataset', type=str, default="2016-06-08--11-46-01", help='Dataset/video clip name')
+  parser.add_argument('--skip', type=str, default=30, help='when to start')
   args = parser.parse_args()
 
   with open(args.model, 'r') as jfile:
@@ -99,7 +100,7 @@ if __name__ == "__main__":
 
   # default dataset is the validation data on the highway
   dataset = args.dataset
-  skip = 594
+  skip = int(args.skip)
 
   log = h5py.File("dataset/log/"+dataset+".h5", "r")
   cam = h5py.File("dataset/camera/"+dataset+".h5", "r")
