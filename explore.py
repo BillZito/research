@@ -9,7 +9,7 @@ import h5py
 # file = h5py.File('dataset/log/2016-03-29--10-50-20.h5', 'r')
 # file = h5py.File('dataset/log/2016-04-21--14-48-08.h5', 'r')
 # file = h5py.File('dataset/log/2016-05-12--22-20-00.h5', 'r')
-file = h5py.File('dataset/log/2016-06-02--21-39-29.h5', 'r')
+# file = h5py.File('dataset/log/2016-06-02--21-39-29.h5', 'r')
 
 turns = {}
 seq = []
